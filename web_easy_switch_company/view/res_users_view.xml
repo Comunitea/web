@@ -18,6 +18,7 @@
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/web_easy_switch_company/static/src/js/switch_company.js"></script>
                 <link rel="stylesheet" href="/web_easy_switch_company/static/src/css/switch_company.css"/>
+                <script type="text/javascript" src="/web_easy_switch_company/static/src/js/list.js"></script>
             </xpath>
         </template>
 

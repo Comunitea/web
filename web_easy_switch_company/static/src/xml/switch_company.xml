@@ -21,29 +21,39 @@
 <template>
 
     <t t-name="web_easy_switch_company.SwitchCompanyWidget">
+        <div class="btn-coop" id="btnCooperativa">
+            <a href="#" class="cooperativa_home" t-att-data-company-id="14">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </div>
         <ul class="nav navbar-nav navbar-right oe_user_menu_placeholder" style="margin-right:10px">
-            <li class="dropdown">
+            <li id="menuDesplegable" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <span class="oe_topbar_name">
                         <t t-esc="widget.current_company_name"/>
                     </span>
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu switch_company_menu">
-                    <t t-foreach="widget.companies" t-as="company">
-                        <li>
-                            <a class="easy_switch_company_company_item"
-                               href="#"
-                               t-att-data-company-id="company.id">
-                                <img class="oe_topbar_avatar" t-att-src="company.logo_topbar"/>
-                                <img class="oe_topbar_avatar" t-att-src="company.logo_state"/>
-                                <t t-esc="company.name"/>
-                            </a>
-                        </li>
-                    </t>
-                </ul>
+                <div class="dropdown-menu" id="users" >
+                    <input id="campoBuscar" class="search" placeholder="Buscar ..." onfocus="setTimeout(function() { document.getElementById('menuDesplegable').className += ' open'; document.getElementById('campoBuscar').focus(); }, 100);" onclick="setTimeout(function() { document.getElementById('menuDesplegable').className += ' open'; document.getElementById('campoBuscar').focus(); }, 100);"  onselect="setTimeout(function() { document.getElementById('menuDesplegable').className += ' open'; document.getElementById('campoBuscar').focus(); }, 100);"/>
+                    <ul class="switch_company_menu list">
+                        <t t-foreach="widget.companies" t-as="company">
+                            <li>
+                                <a class="easy_switch_company_company_item name"
+                                   href="#"
+                                   t-att-data-company-id="company.id">
+                                    <img class="oe_topbar_avatar" t-att-src="company.logo_topbar"/>
+                                    <img class="oe_topbar_avatar" t-att-src="company.logo_state"/>
+                                    <t t-esc="company.name"/>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
             </li>
         </ul>
     </t>
 
 </template>
+
+

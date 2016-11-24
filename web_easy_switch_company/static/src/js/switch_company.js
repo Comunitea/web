@@ -72,6 +72,22 @@ openerp.web_easy_switch_company = function (instance) {
                         });
                     }
                 });
+
+                /***********************************************************************
+                Direct Link Coop 
+                ***********************************************************************/
+
+                $('.btn-coop').on('click', function() {
+                  var company_id = $('.cooperativa_home').attr("data-company-id");
+                  var func       = '/web_easy_switch_company/switch/change_current_company';
+                  var param      = {'company_id': company_id}
+
+                  self.rpc(func, param).done(function(res) {
+                      window.location.reload()
+                  });
+                });
+
+                /***********************************************************************/
             }
         },
 
