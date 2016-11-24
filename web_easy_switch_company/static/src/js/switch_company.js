@@ -20,7 +20,7 @@
 openerp.web_easy_switch_company = function (instance) {
 
     /***************************************************************************
-    Create an new 'SwitchCompanyWidget' widget that allow users to switch 
+    Create an new 'SwitchCompanyWidget' widget that allow users to switch
     from a company to another more easily.
     ***************************************************************************/
     instance.web.SwitchCompanyWidget = instance.web.Widget.extend({
@@ -28,7 +28,7 @@ openerp.web_easy_switch_company = function (instance) {
         template:'web_easy_switch_company.SwitchCompanyWidget',
 
         /***********************************************************************
-        Overload section 
+        Overload section
         ***********************************************************************/
 
         /**
@@ -74,15 +74,13 @@ openerp.web_easy_switch_company = function (instance) {
                 });
 
                 /***********************************************************************
-                Direct Link Coop 
+                Direct Link Coop
                 ***********************************************************************/
 
                 $('.btn-coop').on('click', function() {
-                  var company_id = $('.cooperativa_home').attr("data-company-id");
-                  var func       = '/web_easy_switch_company/switch/change_current_company';
-                  var param      = {'company_id': company_id}
+                  var func       = '/web_easy_switch_company/switch/change_current_company_coop';
 
-                  self.rpc(func, param).done(function(res) {
+                  self.rpc(func, {}).done(function(res) {
                       window.location.reload()
                   });
                 });
@@ -93,7 +91,7 @@ openerp.web_easy_switch_company = function (instance) {
 
 
         /***********************************************************************
-        Custom section 
+        Custom section
         ***********************************************************************/
 
         /**
@@ -115,10 +113,10 @@ openerp.web_easy_switch_company = function (instance) {
                 self.current_company_name = res_users[0].company_id[1];
                 // Request for other companies
                 // We have to go through fields_view_get to emulate the
-                // exact (exotic) behavior of the user preferences form in 
+                // exact (exotic) behavior of the user preferences form in
                 // fetching the allowed companies wrt record rules.
-                // Note: calling res.company.name_search with 
-                //       user_preference=True in the context does 
+                // Note: calling res.company.name_search with
+                //       user_preference=True in the context does
                 //       not work either.
                 new instance.web.Model('res.company').call('name_search',{context:{'user_preference':'True'}}).then(function(res){
                     var res_company = res;
@@ -129,8 +127,8 @@ openerp.web_easy_switch_company = function (instance) {
                         //       probably remove the logos from the menu :(
                         logo_topbar = self.session.url(
                             '/web/binary/image', {
-                                model:'res.company', 
-                                field: 'logo_topbar', 
+                                model:'res.company',
+                                field: 'logo_topbar',
                                 id: res_company[i][0]
                             });
                         if (res_company[i][0] == self.current_company_id){
@@ -168,4 +166,3 @@ openerp.web_easy_switch_company = function (instance) {
     });
 
 };
-
