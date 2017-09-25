@@ -118,7 +118,7 @@ openerp.web_easy_switch_company = function (instance) {
                 // Note: calling res.company.name_search with
                 //       user_preference=True in the context does
                 //       not work either.
-                new instance.web.Model('res.company').call('name_search',{context:{'user_preference':'True'}}).then(function(res){
+                new instance.web.Model('res.company').call('name_search',{context:{'user_preference':'True'}, limit:0}).then(function(res){
                     var res_company = res;
                     for ( var i=0 ; i < res_company.length; i++) {
                         var logo_topbar, logo_state;
