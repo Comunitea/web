@@ -60,6 +60,12 @@ openerp.web_easy_switch_company = function (instance) {
             }
             else{
                 this.$el.show();
+                this.$el.find('#menuDesplegable').on('click', function(ev){
+                    if(!$('#menuDesplegable').hasClass('open')){
+                        $('#campoBuscar').focus();
+                    }
+
+                });
                 this.$el.find('.easy_switch_company_company_item').on('click', function(ev) {
                     var company_id = $(ev.target).data("company-id");
 
