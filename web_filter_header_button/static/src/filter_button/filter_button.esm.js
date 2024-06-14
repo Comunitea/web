@@ -12,9 +12,11 @@ export class FilterButton extends Component {
      * @returns {Array}
      */
     shownFilters(filters) {
-        return filters.filter((filter) => {
+        const filterValues = Object.values(filters);
+        let res = filterValues.filter((filter) => {
             return filter.context && filter.context.shown_in_panel;
         });
+        return res
     }
     /**
      * Return custom properties depending on the filter properties

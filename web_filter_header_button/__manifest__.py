@@ -14,7 +14,9 @@
         "demo/ir_module_module_view.xml",
     ],
     "assets": {
-        "web.assets_backend": ["web_filter_header_button/static/src/**/*.js"],
-        "web.assets_qweb": ["web_filter_header_button/static/src/**/*.xml"],
+        "web.assets_backend": [
+            "web_filter_header_button/static/src/**/*.js",
+            "web_filter_header_button/static/src/**/*.xml",
+        ],
     },
 }

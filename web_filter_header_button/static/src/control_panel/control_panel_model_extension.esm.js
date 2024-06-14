@@ -1,9 +1,10 @@
 /** @odoo-module **/
-import LegacyControlPanelModelExtension from "web/static/src/js/control_panel/control_panel_model_extension.js";
+// import LegacyControlPanelModelExtension from "web/static/src/js/control_panel/control_panel_model_extension.js";
+import ControlPanelModelExtension from "web/static/src/legacy/js/control_panel/control_panel_model_extension.js";
 import {patch} from "web.utils";
 
 patch(
-    LegacyControlPanelModelExtension.prototype,
+    ControlPanelModelExtension.prototype,
     "filter_button.ControlPanelModelExtension",
     {
         /**
