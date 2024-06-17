@@ -3,8 +3,8 @@
 
     <t t-name="filter_button.FilterButton" owl="1">
          <!-- <t t-set="filters" t-value="shownFilters(model.get('filters'))" /> -->
+         <!-- <t t-set="filters" t-value="shownFilters(model.filters)" /> -->
         <t t-set="filters" t-value="shownFilters(model.searchItems)" />
-        <!-- <t t-set="filters" t-value="[]" /> -->
         <div t-if="filters" class="o_cp_bottom_filter_buttons">
             <div class="btn-group">
                 <button
