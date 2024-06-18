@@ -1,6 +1,8 @@
 /** @odoo-module **/
 import { SearchArchParser } from "@web/search/search_arch_parser";
 import {patch} from "web.utils";
+import { makeContext } from "@web/core/context";
+
 
 /**
  * Returns the split 'group_by' key from the given context attribute.
@@ -41,6 +43,9 @@ function reduceType(type) {
 // Need to patch the SearchArchParser to include the context when parsing
 // filters of type groupBy.
 // This is a ugly solution, we only add preSearchItem.context = context;
+// cause the private method getContextGroubBy removes the context from the
+// groupBy filter. If i could patch only the getContextGroubBy method, it
+// would be a better solution. 
 patch(SearchArchParser.prototype, "filter_header_button.SearchArchParser", {
     visitFilter(node) {
         debugger;
@@ -50,6 +55,7 @@ patch(SearchArchParser.prototype, "filter_header_button.SearchArchParser", {
             const [fieldName, defaultInterval] = getContextGroubBy(context);
             const groupByField = this.fields[fieldName];
             if (groupByField) {
+                debugger;
                 preSearchItem.type = "groupBy";
                 preSearchItem.fieldName = fieldName;
                 preSearchItem.fieldType = groupByField.type;
