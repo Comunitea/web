@@ -1,7 +1,8 @@
 /** @odoo-module **/
-import { SearchArchParser } from "@web/search/search_arch_parser";
+import {SearchArchParser} from "@web/search/search_arch_parser";
 import {patch} from "web.utils";
 import { makeContext } from "@web/core/context";
+import { DEFAULT_INTERVAL, DEFAULT_PERIOD } from "@web/search/utils/dates";
 
 
 /**
@@ -29,17 +30,6 @@ function reduceType(type) {
     return type;
 }
 
-function reduceType(type) {
-    if (type === "dateFilter") {
-        return "filter";
-    }
-    if (type === "dateGroupBy") {
-        return "groupBy";
-    }
-    return type;
-}
-
-
 // Need to patch the SearchArchParser to include the context when parsing
 // filters of type groupBy.
 // This is a ugly solution, we only add preSearchItem.context = context;
@@ -48,14 +38,12 @@ function reduceType(type) {
 // would be a better solution. 
 patch(SearchArchParser.prototype, "filter_header_button.SearchArchParser", {
     visitFilter(node) {
-        debugger;
         const preSearchItem = { type: "filter" };
         if (node.hasAttribute("context")) {
             const context = node.getAttribute("context");
             const [fieldName, defaultInterval] = getContextGroubBy(context);
             const groupByField = this.fields[fieldName];
             if (groupByField) {
-                debugger;
                 preSearchItem.type = "groupBy";
                 preSearchItem.fieldName = fieldName;
                 preSearchItem.fieldType = groupByField.type;
