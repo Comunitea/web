@@ -1,5 +1,5 @@
 /** @odoo-module **/
-import { evaluateExpr } from "@web/core/py_js/py";
+import { parseExpr } from "@web/core/py_js/py";
 
 const {Component} = owl;
 
@@ -19,7 +19,9 @@ export class FilterButton extends Component {
         // Convert context from string to object if necessary.
         return filters.filter((filter) => {
             if (typeof filter.context === 'string') {
-                filter.context = evaluateExpr(filter.context);
+                // Dont use evaluateExpr, filters like {'location_id: self'}
+                // raises an error
+                filter.context = parseExpr(filter.context).value;
             }
             return filter.context && filter.context.shown_in_panel;
         });
