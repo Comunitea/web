@@ -16,9 +16,15 @@ export class FilterButton extends Component {
      * @returns {Array}
      */
     shownFilters(filters) {
-        const filterValues = Object.values(filters);
         return filters.filter((filter) => {
-            return filter.context && evaluateExpr(filter.context).shown_in_panel;
+            // Sometimes the context is a string, sometimes it's an object.
+            // When the filter is a favorite, the context is an object
+            if (typeof filter.context === 'string') {
+                return evaluateExpr(filter.context).shown_in_panel;
+            } else if (typeof filter.context === 'object') {
+                return filter.context.shown_in_panel;
+            }
+            return false;
         });
     }
     /**
