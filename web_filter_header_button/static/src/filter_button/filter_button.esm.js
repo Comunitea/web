@@ -7,7 +7,6 @@ const {Component} = owl;
 export class FilterButton extends Component {
     setup() {
         this.model = this.env.searchModel;
-        this.evaluateExpr = evaluateExpr
     }
     /**
      * Filter flagged filters to be shown in the control panel.
@@ -16,17 +15,16 @@ export class FilterButton extends Component {
      * @returns {Array}
      */
     shownFilters(filters) {
+        // Ensure context is always an object to prevent template errors.
+        // Convert context from string to object if necessary.
         return filters.filter((filter) => {
-            // Sometimes the context is a string, sometimes it's an object.
-            // When the filter is a favorite, the context is an object
             if (typeof filter.context === 'string') {
-                return evaluateExpr(filter.context).shown_in_panel;
-            } else if (typeof filter.context === 'object') {
-                return filter.context.shown_in_panel;
+                filter.context = evaluateExpr(filter.context);
             }
-            return false;
+            return filter.context && filter.context.shown_in_panel;
         });
     }
+        
     /**
      * Return custom properties depending on the filter properties
      *
