@@ -9,7 +9,7 @@
     </t>
     <t t-inherit="web.ControlPanel.Regular" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('o_cp_bottom')]" position="after">
-            <t t-if="env.view and env.config.viewType !== 'form'">
+            <t t-if="env.config and env.config.viewType !== 'form'">
                 <FilterButton />
             </t>
         </xpath>
