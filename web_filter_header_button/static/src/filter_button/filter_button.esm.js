@@ -6,7 +6,9 @@ const {Component} = owl;
 
 export class FilterButton extends Component {
     setup() {
-        this.model = this.env.searchModel;
+        let model = this.env.searchModel;
+        this.model = model && typeof model.getSearchItems === 'function' ? model : false;
+
     }
     /**
      * Filter flagged filters to be shown in the control panel.
